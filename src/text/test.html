@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+
+    let test = 1;
+    console.log(test)
+
+    function Ultra() {
+    }
+    Ultra.prototype.ultraProp = true;
+
+    function Super() {
+    }
+    Super.prototype = new Ultra();
+
+    function Sub() {
+    }
+    Sub.prototype = new Super();
+
+    let o = new Sub();
+    console.log(o)
+    console.log(o.ultraProp)
+    console.log(new Map())
+
+
+
+    function Person(name){
+        this.name = name;
+    }
+    // Person.prototype.name=null;
+    Person.prototype.introduce = function(){
+        return 'My name is '+this.name;
+    }
+    let p1 = new Person('egoing');
+    document.write(p1.introduce()+"<br />");
+
+    //
+    // let testa = [1, 2, 3, 4, 5];
+    // for (var i = 0; i < testa.length; i++) {
+    //
+    // }
+    // console.log(i)
+    console.log(p1.name)
+
+</script>
+</html>
