@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import './App.css';
-import {Component, useState} from "react";
+import {Component, useMemo, useState} from "react";
 
 // JSX는 JavaScript를 확장한 문법이다.
 // JavaScript의 모든 기능이 포함되어 있다.
@@ -21,10 +21,7 @@ import {Component, useState} from "react";
 //   );
 // }
 const App = () => {
-
-  const [username, setUsername] = useState("ldw");
-
-  const itemDataList = [
+  var itemDataList = [
     {
       name: "CPU",
       price: "46984",
@@ -33,7 +30,7 @@ const App = () => {
     {
       name: "메인보드",
       price: "112053",
-      quantity: 1
+      quantity:1
     },
     {
       name: "메모리",
@@ -45,24 +42,13 @@ const App = () => {
   const [items, setItems] = useState(itemDataList) ;
 
 
-  const handleClickTyler = () => {
-    console.log("handleClickTyler");
-    setUsername("Tyler");
-    // this.setState({userName: "Tyler"});
-  }
-  const handleClickJulian = () => {
-    console.log("handleClickJulian");
-    setUsername("Julian");
-    // this.setState({userName: "Julian"});
+  const calcTotalPrice = (items) => {
+    return items.reduce(function (sum, item) {
+      return sum + item.price * item.quantity;
+    });
   }
 
-  return (
-      <div>
-        <h1>Hello {username}</h1>
-        <button onClick={handleClickTyler}>Tyler</button>
-        <button onClick={handleClickJulian}>Julian</button>
-      </div>
-  )
+  const totalPrice = useMemo(() => calcTotalPrice(items),[items]);
 }
 
 export default App;
