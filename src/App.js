@@ -1,6 +1,7 @@
 // import logo from './logo.svg';
 import './App.css';
-import {Component, useState} from "react";
+import {Component, useMemo, useState} from "react";
+// import {useMemo} from "@types/react";/**/
 
 // JSX는 JavaScript를 확장한 문법이다.
 // JavaScript의 모든 기능이 포함되어 있다.
@@ -20,6 +21,21 @@ import {Component, useState} from "react";
 //       </div>
 //   );
 // }
+const calcTotalPrice = (items) => {
+  // return items.reduce(function (sum, item) {
+  //   console.log(sum)
+  //
+  //   console.log(sum + item.price * item.quantity)
+  //   return sum + item.price * item.quantity;
+  // },0);
+  // return items.reduce((sum, item) =>
+  //     {
+  //       return sum + item.price * item.quantity;
+  //     }
+  //     ,0);
+  return items.reduce((sum, item) => sum + item.price * item.quantity, 0 );
+
+}
 const App = () => {
 
   const [username, setUsername] = useState("ldw");
@@ -27,22 +43,23 @@ const App = () => {
   const itemDataList = [
     {
       name: "CPU",
-      price: "46984",
+      price: 46984,
       quantity: 1
     },
     {
       name: "메인보드",
-      price: "112053",
+      price: 112053,
       quantity: 1
     },
     {
       name: "메모리",
-      price: "79608",
+      price: 79608,
       quantity: 2,
     }
   ];
 
   const [items, setItems] = useState(itemDataList) ;
+  const totalPrice = useMemo(() => calcTotalPrice(items),[items]);
 
 
   const handleClickTyler = () => {
@@ -59,6 +76,7 @@ const App = () => {
   return (
       <div>
         <h1>Hello {username}</h1>
+        <h1>{totalPrice}</h1>
         <button onClick={handleClickTyler}>Tyler</button>
         <button onClick={handleClickJulian}>Julian</button>
       </div>
